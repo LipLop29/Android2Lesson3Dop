@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Android2Lesson3Dop</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="reg">Registration</string>
+    <string name="Name">Name</string>
+    <string name="password">Password</string>
+    <string name="register">Register</string>
+    <string name="your_data">Your data</string>
+    <string name="name_">Name :</string>
+    <string name="password_">Password :</string>
+</resources>
