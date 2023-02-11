@@ -12,14 +12,14 @@ import com.example.android2lesson3dop.utils.PreferenceHelper
 
 class RegistrationFragment : Fragment() {
 
-    private lateinit var binding: FragmentRegistrationBinding
+    private var binding: FragmentRegistrationBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         binding = FragmentRegistrationBinding.inflate(inflater, container, false)
-        return binding.root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -32,25 +32,26 @@ class RegistrationFragment : Fragment() {
         PreferenceHelper.unit(requireContext())
     }
 
-    private fun setupListener() = with(binding) {
-        btnReg.setOnClickListener {
-            PreferenceHelper.safeText = etName.text.toString().trim()
-            PreferenceHelper.safeText2 = etPsw.text.toString().trim()
-
-            if (etName.text.isEmpty() || etPsw.text.isEmpty()) {
-                if (etName.text.isEmpty()) {
-                    etName.error = "Заполните поля!"
+    private fun setupListener() {
+        binding?.btnReg?.setOnClickListener {
+            if (binding?.etName?.text?.isNotEmpty() != null || binding?.etPsw?.text?.isEmpty() != null) {
+                PreferenceHelper.safeText = binding?.etName?.text.toString().trim()
+                PreferenceHelper.safeText2 = binding?.etPsw?.text.toString().trim()
+            }
+            if (binding?.etName?.text!!.isEmpty() || binding?.etPsw?.text!!.isEmpty()) {
+                if (binding?.etName?.text!!.isEmpty()) {
+                    binding?.etName?.error = "Заполните поля!"
                 }
-                if (etPsw.text.isEmpty()) {
-                    etPsw.error = "Заполните поля!"
+                if (binding?.etPsw?.text!!.isEmpty()) {
+                    binding?.etPsw?.error = "Заполните поля!"
                 }
             }
-            if (etName.length() in 0..4 || etPsw.length() in 0..7) {
-                if (etName.length() in 1..4) {
-                    etName.error = "Должно быть не менее 5 символов"
+            if (binding?.etName?.length() in 0..4 || binding?.etPsw?.length() in 0..7) {
+                if (binding?.etName?.length() in 1..4) {
+                    binding?.etName?.error = "Должно быть не менее 5 символов"
                 }
-                if (etPsw.length() in 1..7) {
-                    etPsw.error = "Должно быть не менее 8 символов"
+                if (binding?.etPsw?.length() in 1..7) {
+                    binding?.etPsw?.error = "Должно быть не менее 8 символов"
                 }
             } else {
                 findNavController().navigate(R.id.action_registrationFragment_to_getRegistrationDataFragment)
